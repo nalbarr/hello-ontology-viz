@@ -1,0 +1,74 @@
+@prefix rdf:   <http://w3.org> .
+@prefix rdfs:  <http://w3.org> .
+@prefix owl:   <http://w3.org> .
+@prefix xsd:   <http://w3.org> .
+@prefix chem:  <http://example.org> .
+@prefix pfas:  <http://example.org> .
+
+### Ontology Classes
+chem:ChemicalCompound a owl:Class ;
+    rdfs:label "Chemical Compound" ;
+    rdfs:comment "A substance formed when two or more chemical elements are chemically bonded together." .
+
+chem:ChemicalElement a owl:Class ;
+    rdfs:label "Chemical Element" .
+
+chem:ChemicalBond a owl:Class ;
+    rdfs:label "Chemical Bond" .
+
+pfas:PFASSubstance a owl:Class ;
+    rdfs:subClassOf chem:ChemicalCompound ;
+    rdfs:label "Per- and Polyfluoroalkyl Substance" ;
+    rdfs:comment "A large group of synthetic organofluorine compounds containing multiple fluorine atoms attached to an alkyl chain." .
+
+pfas:MolecularComponent a owl:Class ;
+    rdfs:label "Molecular Component" .
+
+### Properties
+chem:hasElement a owl:ObjectProperty ;
+    rdfs:domain chem:ChemicalCompound ;
+    rdfs:range chem:ChemicalElement .
+
+chem:hasBondType a owl:ObjectProperty ;
+    rdfs:domain chem:ChemicalCompound ;
+    rdfs:range chem:ChemicalBond .
+
+pfas:hasComponent a owl:ObjectProperty ;
+    rdfs:domain pfas:PFASSubstance ;
+    rdfs:range pfas:MolecularComponent .
+
+chem:bondEnergyKJ a owl:DatatypeProperty ;
+    rdfs:domain chem:ChemicalBond ;
+    rdfs:range xsd:integer .
+
+pfas:isPersistent a owl:DatatypeProperty ;
+    rdfs:domain pfas:PFASSubstance ;
+    rdfs:range xsd:boolean .
+
+### Individuals & Elements
+chem:Carbon a chem:ChemicalElement ; rdfs:label "Carbon (C)" .
+chem:Fluorine a chem:ChemicalElement ; rdfs:label "Fluorine (F)" .
+chem:Oxygen a chem:ChemicalElement ; rdfs:label "Oxygen (O)" .
+
+chem:CarbonFluorineBond a chem:ChemicalBond ;
+    rdfs:label "Carbon-Fluorine Bond" ;
+    rdfs:comment "One of the strongest single bonds in organic chemistry." ;
+    chem:bondEnergyKJ 485 . # Approximate energy in kJ/mol
+
+### Structural Components
+pfas:FluorinatedTail a pfas:MolecularComponent ;
+    rdfs:label "Perfluorinated Alkyl Tail" ;
+    rdfs:comment "Hydrophobic and lipophobic tail preventing biological and environmental breakdown." .
+
+pfas:CarboxylicHead a pfas:MolecularComponent ;
+    rdfs:label "Carboxylic Acid Functional Head" ;
+    rdfs:comment "Hydrophilic head group that makes the compound water-soluble." .
+
+### Specific Example: PFOA (Perfluorooctanoic Acid)
+pfas:PFOA a pfas:PFASSubstance ;
+    rdfs:label "PFOA" ;
+    rdfs:comment "Perfluorooctanoic Acid, a widely studied long-chain PFAS compound." ;
+    chem:hasElement chem:Carbon, chem:Fluorine, chem:Oxygen ;
+    chem:hasBondType chem:CarbonFluorineBond ;
+    pfas:hasComponent pfas:FluorinatedTail, pfas:CarboxylicHead ;
+    pfas:isPersistent true .
