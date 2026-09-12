@@ -209,6 +209,9 @@ tempCodeRunnerFile.py
 # PyPI configuration file
 .pypirc
 
+# Generated ontology visualization output
+pizza_ontology.html
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
