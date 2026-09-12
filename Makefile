@@ -1,11 +1,16 @@
 help:
 	@echo make run
-	@echo make load-pizza-ontology
+	@echo make test
+	@echo make test-all
 
-run: load-pizza-ontology
+run:
+	uv run -- python main.py
 
-load-pizza-ontology:
-	uv run -- python load_pizza_ontology.py
+test:
+	uv run -- pytest -m "not slow"
+
+test-all:
+	uv run -- pytest
 
 clean:
 	rm -fr ./pizza_ontology.html
