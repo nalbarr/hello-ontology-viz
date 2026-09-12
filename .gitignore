@@ -210,7 +210,7 @@ tempCodeRunnerFile.py
 .pypirc
 
 # Generated ontology visualization output
-pizza_ontology.html
+/output/
 
 # Marimo
 marimo/_static/
