@@ -8,8 +8,11 @@ dependencies = [
     "matplotlib>=3.11.1",
     "networkx>=3.6.1",
     "owlready2>=0.51",
-    "pyvis>=0.3.2",
+    "pillow>=11.0.0",
+    "pydot>=3.0.4",
+    "python-dotenv>=1.0.1",
     "rdflib>=7.6.0",
+    "rustworkx>=0.16.0",
 ]
 
 [build-system]
